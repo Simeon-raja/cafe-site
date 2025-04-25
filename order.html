@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Order your favorite coffee and pastries online" />
+    <meta name="author" content="Our Café" />
+    <title>Order Coffee & Pastries Online – Pickup at Our Café</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+    <style>
+        /* minimal tweaks so inputs align nicely */
+        .menu-item label {width: 100%; font-weight: 600;}
+        .price-tag {float:right; font-weight: 400;}
+    </style>
+</head>
+<body>
+<header>
+    <h1 class="site-heading text-center text-faded d-none d-lg-block">
+        <span class="site-heading-upper text-primary mb-3">Skip the Line, Pick Up Fresh<</span>
+        <span class="site-heading-lower">Order Ahead</span>
+    </h1>
+</header>
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand text-uppercase fw-bold d-lg-none" href="index.html">Our Café</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="index.html">Home</a></li>
+                <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="about.html">About</a></li>
+                <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="products.html">Products</a></li>
+                <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="store.html">Store</a></li>
+                <li class="nav-item px-lg-4"><a class="nav-link text-uppercase active" href="order.html">Order</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<section class="page-section">
+    <div class="container">
+        <div class="row align-items-start">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <div class="bg-faded p-5 rounded">
+                    <h2 class="section-heading mb-4 text-center">
+                        <span class="section-heading-upper">Choose Your Favorites</span>
+                        <span class="section-heading-lower">Menu</span>
+                    </h2>
+                    <form id="orderForm">
+                        <div class="menu-item mb-3">
+                            <label>Cappuccino <span class="price-tag">₹220</span></label>
+                            <input type="number" min="0" value="0" class="form-control" name="Cappuccino" data-price="220">
+                        </div>
+                        <div class="menu-item mb-3">
+                            <label>Espresso <span class="price-tag">₹180</span></label>
+                            <input type="number" min="0" value="0" class="form-control" name="Espresso" data-price="180">
+                        </div>
+                        <div class="menu-item mb-3">
+                            <label>Latte <span class="price-tag">₹240</span></label>
+                            <input type="number" min="0" value="0" class="form-control" name="Latte" data-price="240">
+                        </div>
+                        <div class="menu-item mb-3">
+                            <label>Cold Brew <span class="price-tag">₹260</span></label>
+                            <input type="number" min="0" value="0" class="form-control" name="Cold Brew" data-price="260">
+                        </div>
+                        <div class="menu-item mb-3">
+                            <label>Blueberry Muffin <span class="price-tag">₹120</span></label>
+                            <input type="number" min="0" value="0" class="form-control" name="Blueberry Muffin" data-price="120">
+                        </div>
+                        <hr>
+                        <div class="mb-3">
+                            <label for="pickupTime" class="form-label fw-bold">Preferred Pick‑Up Time</label>
+                            <input type="time" class="form-control" id="pickupTime" required>
+                        </div>
+                        <h4 class="text-center mb-3">Total: ₹<span id="totalPrice">0</span></h4>
+                        <button type="submit" class="btn btn-primary btn-xl d-block mx-auto">Submit Order</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <div class="bg-faded p-5 rounded h-100 d-flex flex-column justify-content-center">
+                    <h3 class="mb-4">Order with Your Phone</h3>
+                    <img class="img-fluid rounded" src="assets/img/WhatsApp Image 2025-04-24 at 05.57.53_3a191c0b.jpg" alt="QR code to order online" />
+                    <p class="mt-3 mb-0">Scan to open this page on mobile.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer text-faded text-center py-5">
+    <div class="container"><p class="m-0 small">Copyright © Our Café 2025</p></div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// live price calculation
+const form = document.getElementById('orderForm');
+const totalPriceEl = document.getElementById('totalPrice');
+form.addEventListener('input', () => {
+    let total = 0;
+    form.querySelectorAll('input[type="number"]').forEach(inp => {
+        const qty = parseInt(inp.value) || 0;
+        const price = parseInt(inp.dataset.price);
+        total += qty * price;
+    });
+    totalPriceEl.textContent = total.toLocaleString('en-IN');
+});
+
+// dummy submission handler
+form.addEventListener('submit', e => {
+    e.preventDefault();
+    alert('Thank you! Your order total is ₹' + totalPriceEl.textContent + '. We will have it ready at ' + document.getElementById('pickupTime').value + '.');
+    form.reset();
+    totalPriceEl.textContent = '0';
+});
+</script>
+</body>
+</html>
